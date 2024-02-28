@@ -3,6 +3,7 @@ import express from 'express';
 import auth, { RequestWithUser } from '../middleware/auth';
 import { imagesUpload } from '../multer';
 import Post from '../models/Post';
+import { PostsAll } from '../types';
 
 const postsRouter = express.Router();
 
@@ -32,4 +33,28 @@ postsRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next)
   }
 });
 
-export default postsRouter
+postsRouter.get('/', async (_, res) => {
+  try {
+    const posts = await Post.find<PostsAll>()
+      .populate({
+        path: 'user',
+        populate: {
+          path: 'username',
+        },
+      })
+      .sort({ datetime: -1 });
+
+    const postsList = posts.map((item) => ({
+      id_post: item._id,
+      username: item.user.username,
+      title: item.title,
+      image: item.image,
+      datetime: item.datetime,
+    }));
+    return res.send(postsList);
+  } catch {
+    return res.sendStatus(500);
+  }
+});
+
+export default postsRouter;
