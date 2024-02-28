@@ -1,27 +1,27 @@
-import {Schema} from "mongoose";
+import { Schema } from 'mongoose';
 
 export interface Post {
-  title: string,
-  user: Schema.Types.ObjectId,
-  datetime: Schema.Types.Date,
-  description: string,
-  image: string
+  title: string;
+  user: Schema.Types.ObjectId;
+  datetime: Schema.Types.Date;
+  description: string;
+  image: string;
 }
 
 export interface UserFields {
-  username: string,
-  password: string,
-  token: string,
+  username: string;
+  password: string;
+  token: string;
 }
 
 export interface UserWithId extends User {
-  _id: Schema.Types.ObjectId
+  _id: Schema.Types.ObjectId;
 }
 
 export interface Comment {
-  user: Schema.Types.ObjectId,
-  post: Schema.Types.ObjectId,
-  body: string
+  user: Schema.Types.ObjectId;
+  post: Schema.Types.ObjectId;
+  body: string;
 }
 
 export interface PostsAll {
@@ -36,5 +36,3 @@ export interface PostsAll {
   datetime: Date;
   image: string | null;
 }
-
-
