@@ -14,10 +14,6 @@ export interface UserFields {
   token: string;
 }
 
-export interface UserWithId extends User {
-  _id: Schema.Types.ObjectId;
-}
-
 export interface Comment {
   user: Schema.Types.ObjectId;
   post: Schema.Types.ObjectId;
