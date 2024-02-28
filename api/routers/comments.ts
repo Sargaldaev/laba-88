@@ -32,4 +32,14 @@ commentsRouter.post('/', auth, async (req, res) => {
   }
 });
 
+commentsRouter.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const comments = await Comment.find({ post: id }).populate('user', 'username -_id');
+    return res.send(comments);
+  } catch {
+    return res.sendStatus(500);
+  }
+});
+
 export default commentsRouter;
