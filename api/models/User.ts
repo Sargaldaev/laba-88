@@ -1,10 +1,11 @@
-import mongoose, {HydratedDocument, Model} from 'mongoose';
-import {UserFields} from '../types';
+import mongoose, { HydratedDocument, Model } from 'mongoose';
+import { UserFields } from '../types';
 import bcrypt from 'bcrypt';
-import {randomUUID} from 'crypto';
+import { randomUUID } from 'crypto';
 
 interface UserMethods {
   checkPassword(password: string): Promise<boolean>;
+
   generateToken(): void;
 }
 
@@ -24,7 +25,7 @@ const UserSchema = new Schema<UserFields, UserModel, UserMethods>({
       ): Promise<boolean> {
         if (!this.isModified('username')) return true;
         const user: HydratedDocument<UserFields> | null = await User.findOne({ username });
-        return !Boolean(user);
+        return !user;
       },
       message: 'This user is already registered',
     },
