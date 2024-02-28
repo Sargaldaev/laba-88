@@ -57,4 +57,31 @@ postsRouter.get('/', async (_, res) => {
   }
 });
 
+postsRouter.get('/:id', async (req, res) => {
+  try {
+    if (req.params.id) {
+      const postOne = await Post.findById<PostsAll>(req.params.id).populate({
+        path: 'user',
+        populate: {
+          path: 'username',
+        },
+      });
+      if (!postOne) {
+        return res.sendStatus(404);
+      }
+      const postOneResult = {
+        id_post: postOne._id,
+        username: postOne.user.username,
+        title: postOne.title,
+        image: postOne.image,
+        description: postOne.description,
+        datetime: postOne.datetime,
+      };
+      return res.send(postOneResult);
+    }
+  } catch {
+    return res.sendStatus(500);
+  }
+});
+
 export default postsRouter;
