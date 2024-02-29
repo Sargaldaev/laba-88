@@ -33,28 +33,28 @@ const run = async () => {
   const [postOne, postTwo, postThree, postFour] = await Post.create(
     {
       user: user._id,
-      title: 'Post 1',
+      title: 'AllPost 1',
       image: '',
       description: 'post 1 description',
       datetime: new Date().toISOString(),
     },
     {
       user: user._id,
-      title: 'Post 2',
+      title: 'AllPost 2',
       image: '',
       description: 'post 2 description',
       datetime: new Date().toISOString(),
     },
     {
       user: admin._id,
-      title: 'Post 3',
+      title: 'AllPost 3',
       image: '',
       description: 'post 3 description',
       datetime: new Date().toISOString(),
     },
     {
       user: admin._id,
-      title: 'Post 4',
+      title: 'AllPost 4',
       image: '',
       description: 'post 4 description',
       datetime: new Date().toISOString(),

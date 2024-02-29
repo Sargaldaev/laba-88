@@ -19,7 +19,7 @@ const commentSchema = new Schema<Comment>({
     ref: 'Post',
     validate: {
       validator: async (value: Types.ObjectId) => Post.findById(value),
-      message: 'Post is not found!',
+      message: 'AllPost is not found!',
     },
   },
   body: {

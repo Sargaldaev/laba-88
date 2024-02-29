@@ -5,6 +5,8 @@ import { Route, Routes } from 'react-router-dom';
 import RegisterForm from './features/User/RegisterForm/RegisterForm.tsx';
 import LoginForm from './features/User/LoginForm/LoginForm.tsx';
 import AppToolbar from './components/Toolbar/AppToolbar.tsx';
+import AllPost from './features/Post/AllPost/AllPost.tsx';
+import AddNewPost from './features/Post/AddNewPost/AddNewPost.tsx';
 
 function App() {
 
@@ -19,7 +21,8 @@ function App() {
         <main>
           <Container maxWidth="xl">
             <Routes>
-              <Route path="/" element={'hello'}/>
+              <Route path="/" element={<AllPost/>}/>
+              <Route path="/posts/new" element={<AddNewPost/>}/>
               <Route path="/register" element={<RegisterForm/>}/>
               <Route path="/login" element={<LoginForm/>}/>
               <Route path="*" element={'Not Found'}/>

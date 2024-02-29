@@ -1,5 +1,5 @@
 import { GlobalError, User, ValidationError } from '../../types';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { login, register } from './userThunk.ts';
 
 interface UserState {
@@ -32,7 +32,7 @@ export const usersSlice = createSlice(({
       state.registerLoading = true;
       state.registerError = null;
     });
-    builder.addCase(register.fulfilled, (state: UserState, action) => {
+    builder.addCase(register.fulfilled, (state: UserState, action: PayloadAction<User>) => {
       state.registerLoading = false;
       state.user = action.payload || null;
     });
@@ -45,7 +45,7 @@ export const usersSlice = createSlice(({
       state.loginLoading = true;
       state.loginError = null;
     });
-    builder.addCase(login.fulfilled, (state: UserState, action) => {
+    builder.addCase(login.fulfilled, (state: UserState, action: PayloadAction<User>) => {
       state.loginLoading = false;
       state.user = action.payload;
     });

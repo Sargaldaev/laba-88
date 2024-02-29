@@ -10,7 +10,7 @@ commentsRouter.post('/', auth, async (req, res) => {
   try {
     const { post, body } = req.body;
     const postEx = await Post.find({ _id: post });
-    if (!postEx) return res.status(404).send('No Post!');
+    if (!postEx) return res.status(404).send('No AllPost!');
 
     const commentData = {
       user: user._id,
