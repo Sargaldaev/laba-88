@@ -3,6 +3,7 @@ import { Schema } from 'mongoose';
 export interface Post {
   title: string;
   user: Schema.Types.ObjectId;
+  comment: Schema.Types.ObjectId;
   datetime: Schema.Types.Date;
   description: string;
   image: string;

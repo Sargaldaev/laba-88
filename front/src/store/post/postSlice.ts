@@ -6,6 +6,7 @@ interface PostsState {
   posts: Post[];
   postOne: PostOne | null;
   fetchLoading: boolean;
+  postOneLoad:boolean;
   createLoading: boolean;
   createPostError: boolean;
 }
@@ -14,6 +15,7 @@ const initialState: PostsState = {
   posts: [],
   postOne: null,
   fetchLoading: false,
+  postOneLoad:false,
   createLoading: false,
   createPostError: false,
 };
@@ -35,14 +37,14 @@ export const postsSlice = createSlice({
     });
 
     builder.addCase(fetchPostOne.pending, (state) => {
-      state.fetchLoading = true;
+      state.postOneLoad = true;
     });
     builder.addCase(fetchPostOne.fulfilled, (state, action: PayloadAction<PostOne>) => {
-      state.fetchLoading = false;
+      state.postOneLoad = false;
       state.postOne = action.payload;
     });
     builder.addCase(fetchPostOne.rejected, (state) => {
-      state.fetchLoading = false;
+      state.postOneLoad = false;
     });
 
     builder.addCase(createPost.pending, (state) => {

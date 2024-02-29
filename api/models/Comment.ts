@@ -10,7 +10,7 @@ const commentSchema = new Schema<Comment>({
     ref: 'User',
     validate: {
       validator: async (value: Types.ObjectId) => User.findById(value),
-      message: 'User does not exist!',
+      message: 'Users does not exist!',
     },
   },
   post: {

@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link as NavLink, useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CreatePost } from '../../../types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,6 @@ import { Alert, Button, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 
-
 const AddNewPost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [filename, setFilename] = useState('');
@@ -26,8 +25,17 @@ const AddNewPost = () => {
   const [error, setError] = useState('');
   const dispatch = useDispatch<AppDispatch>();
   const {createLoading} = useSelector((state: RootState) => state.posts);
+  const {user} = useSelector((state: RootState) => state.users);
   const navigate = useNavigate();
   const defaultTheme = createTheme();
+
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
+
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
@@ -87,9 +95,17 @@ const AddNewPost = () => {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
-            New post
-          </Typography>
+          <Box
+            display={'flex'}
+          >
+
+            <Typography component="h1" variant="h5">
+              New post
+            </Typography>
+            <Button sx={{ml: 28}} component={NavLink} to="/" color="inherit">
+              back
+            </Button>
+          </Box>
           <Box component="form" noValidate onSubmit={submitFormHandler} sx={{mt: 3}}>
             <Grid container spacing={2}>
               <Grid item xs={12}>

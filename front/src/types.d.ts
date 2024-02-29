@@ -14,6 +14,7 @@ export interface Post {
   id_post: string;
   title: string,
   username: string;
+  comment: string;
   datetime: Date;
   image: string | null;
 }

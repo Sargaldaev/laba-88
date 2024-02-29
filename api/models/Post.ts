@@ -9,7 +9,7 @@ const PostSchema = new Schema<Post>({
     ref: 'User',
     validate: {
       validator: async (value: Schema.Types.ObjectId) => User.findById(value),
-      message: 'User is not found!',
+      message: 'Users is not found!',
     },
   },
   title: {
