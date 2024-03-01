@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Alert, Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +17,6 @@ const LoginForm = () => {
     username: '',
     password: '',
   });
-  const defaultTheme = createTheme();
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
@@ -40,76 +38,82 @@ const LoginForm = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline/>
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-            <LockOutlinedIcon/>
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          {
-            error &&
-            <Alert severity="error" sx={{mt: 3, width: '100%'}}>
-              {error.error}
-            </Alert>
-          }
-          <Box component="form" noValidate onSubmit={submitFormHandler} sx={{mt: 3}}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  label="username"
-                  name="username"
-                  autoComplete="new-username"
-                  value={state.username}
-                  onChange={inputChangeHandler}
-                  fullWidth={true}
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="password"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  value={state.password}
-                  onChange={inputChangeHandler}
-                  fullWidth={true}
-                  required
-                />
-              </Grid>
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        paddingTop: 10
+      }}
+    >
+      <CssBaseline/>
+      <Box
+        sx={{
+          padding: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          border: '1px solid white',
+          borderRadius: 3
+        }}
+      >
+        <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+          <LockOutlinedIcon/>
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        {
+          error &&
+          <Alert severity="error" sx={{mt: 3, width: '100%'}}>
+            {error.error}
+          </Alert>
+        }
+        <Box component="form" noValidate onSubmit={submitFormHandler} sx={{mt: 3}}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label="username"
+                name="username"
+                autoComplete="new-username"
+                value={state.username}
+                onChange={inputChangeHandler}
+                fullWidth={true}
+                required
+              />
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{mt: 3, mb: 2}}
-              disabled={loginLoading ? true : false}
-            >
-              {loginLoading ? <CircularProgress/> : 'Sign In'}
+            <Grid item xs={12}>
+              <TextField
+                label="password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                value={state.password}
+                onChange={inputChangeHandler}
+                fullWidth={true}
+                required
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{mt: 3, mb: 2}}
+            disabled={loginLoading ? true : false}
+          >
+            {loginLoading ? <CircularProgress/> : 'Sign In'}
 
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link component={RouterLink} to="/register" variant="body2">
-                  Don't have an account? Sign up!
-                </Link>
-              </Grid>
+          </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link component={RouterLink} to="/register" variant="body2">
+                Don't have an account? Sign up!
+              </Link>
             </Grid>
-          </Box>
+          </Grid>
         </Box>
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   );
 };
 

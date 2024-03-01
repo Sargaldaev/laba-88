@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../app/store.ts';
 import { fetchComments } from '../../../store/comment/commentThunk.ts';
 import TextsmsIcon from '@mui/icons-material/Textsms';
+import Typography from '@mui/material/Typography';
 
 
 interface Props {
@@ -21,6 +22,8 @@ const Comments: React.FC<Props> = ({id}) => {
   }, [dispatch, id]);
   return (
     <List sx={{width: '100%', height: '500px', bgcolor: 'background.paper', overflowY: 'auto'}}>
+      {comments.length === 0 ? <Typography>
+        Comments are empty, add a comment !</Typography> : null}
       {
         createLoading ? <CircularProgress/> :
           comments.map((item) => (

@@ -7,7 +7,7 @@ import { createComment, fetchComments } from '../../../store/comment/commentThun
 import LoadingButton from '@mui/lab/LoadingButton';
 import Grid from '@mui/material/Grid';
 import SendIcon from '@mui/icons-material/Send';
-import { TextField, Typography } from '@mui/material';
+import { TextField } from '@mui/material';
 
 const AddNewComment = () => {
   const {id} = useParams() as { id: string };
@@ -69,7 +69,7 @@ const AddNewComment = () => {
             variant="contained"
             loading={createLoading}
           >
-            <Typography>Send</Typography>
+            Send
           </LoadingButton>
         </Grid>
       </Grid>

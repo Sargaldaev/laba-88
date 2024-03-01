@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link as NavLink, useNavigate } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CreatePost } from '../../../types';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../app/store.ts';
@@ -27,7 +26,6 @@ const AddNewPost = () => {
   const {createLoading} = useSelector((state: RootState) => state.posts);
   const {user} = useSelector((state: RootState) => state.users);
   const navigate = useNavigate();
-  const defaultTheme = createTheme();
 
 
   useEffect(() => {
@@ -84,94 +82,100 @@ const AddNewPost = () => {
     }
   };
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline/>
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        paddingTop: 20
+      }}
+    >
+      <Button component={NavLink} to="/" color="inherit">
+        back
+      </Button>
+      <CssBaseline/>
+      <Box
+        sx={{
+          padding: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          border: '1px solid white',
+          borderRadius: 3
+        }}
+      >
         <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+          display={'flex'}
         >
-          <Box
-            display={'flex'}
-          >
+          <Typography component="h1" variant="h5">
+            New post
+          </Typography>
 
-            <Typography component="h1" variant="h5">
-              New post
-            </Typography>
-            <Button sx={{ml: 28}} component={NavLink} to="/" color="inherit">
-              back
-            </Button>
-          </Box>
-          <Box component="form" noValidate onSubmit={submitFormHandler} sx={{mt: 3}}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  label="title"
-                  name="title"
-                  type="text"
-                  autoComplete="new-username"
-                  value={state.title}
-                  onChange={inputChangeHandler}
-                  fullWidth={true}
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="description"
-                  name="description"
-                  type="text"
-                  autoComplete="new-password"
-                  value={state.description}
-                  onChange={inputChangeHandler}
-                  fullWidth={true}
-                />
-                <input
-                  style={{display: 'none'}}
-                  type="file"
-                  name="image"
-                  onChange={onFileChange}
-                  ref={inputRef}
-                />
-                <Grid container direction="row" mt={2} alignItems="center">
-                  <Grid item xs mr={2}>
-                    <TextField
-                      disabled
-                      label="Browse image"
-                      value={filename}
-                      onClick={activateInput}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item>
-                    <Button variant="contained" onClick={activateInput}>Browse</Button>
-                  </Grid>
+        </Box>
+        <Box component="form" noValidate onSubmit={submitFormHandler} sx={{mt: 3}}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label="title"
+                name="title"
+                type="text"
+                autoComplete="new-username"
+                value={state.title}
+                onChange={inputChangeHandler}
+                fullWidth={true}
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="description"
+                name="description"
+                type="text"
+                autoComplete="new-password"
+                value={state.description}
+                onChange={inputChangeHandler}
+                fullWidth={true}
+              />
+              <input
+                style={{display: 'none'}}
+                type="file"
+                name="image"
+                onChange={onFileChange}
+                ref={inputRef}
+              />
+              <Grid container direction="row" mt={2} alignItems="center">
+                <Grid item xs mr={2}>
+                  <TextField
+                    disabled
+                    label="Browse image"
+                    value={filename}
+                    onClick={activateInput}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" onClick={activateInput}>Browse</Button>
                 </Grid>
               </Grid>
             </Grid>
-            {
-              error.length !== 0 &&
-              <Alert severity="error" sx={{mt: 1, width: '100%'}}>
-                {error}
-              </Alert>
-            }
-            <LoadingButton
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{mt: 3, mb: 2}}
-              loading={createLoading}
-            >
-              Create post
-            </LoadingButton>
-          </Box>
+          </Grid>
+          {
+            error.length !== 0 &&
+            <Alert severity="error" sx={{mt: 1, width: '100%'}}>
+              {error}
+            </Alert>
+          }
+          <LoadingButton
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{mt: 3, mb: 2}}
+            loading={createLoading}
+          >
+            Create post
+          </LoadingButton>
         </Box>
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   );
 };
 

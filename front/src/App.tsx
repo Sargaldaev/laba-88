@@ -1,4 +1,3 @@
-import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { Route, Routes } from 'react-router-dom';
@@ -8,12 +7,19 @@ import AppToolbar from './components/Toolbar/AppToolbar.tsx';
 import AllPost from './features/Posts/AllPost/AllPost.tsx';
 import AddNewPost from './features/Posts/AddNewPost/AddNewPost.tsx';
 import OnePost from './features/Posts/OnePost/OnePost.tsx';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
-
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
   return (
     <>
-      <Grid>
+      <ThemeProvider theme={darkTheme}>
+
+
         <CssBaseline/>
         <header>
           <AppToolbar/>
@@ -26,10 +32,10 @@ function App() {
             <Route path="/posts/new" element={<AddNewPost/>}/>
             <Route path="/register" element={<RegisterForm/>}/>
             <Route path="/login" element={<LoginForm/>}/>
-            <Route path="*" element={'Not Found'}/>
+            <Route path="*" element={<h1 style={{paddingTop: 100}}>Not Found</h1>}/>
           </Routes>
         </Container>
-      </Grid>
+      </ThemeProvider>
     </>
   );
 }

@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import { RegisterMutation } from '../../../types';
@@ -31,11 +30,10 @@ function Copyright(props: any) {
   );
 }
 
-const defaultTheme = createTheme();
 
 const RegisterForm = () => {
 
-  const {registerError,registerLoading} = useSelector((state: RootState) => state.users);
+  const {registerError, registerLoading} = useSelector((state: RootState) => state.users);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [users, setUsers] = useState<RegisterMutation>({
@@ -46,7 +44,7 @@ const RegisterForm = () => {
     e.preventDefault();
     try {
       await dispatch(register(users)).unwrap();
-      navigate('/')
+      navigate('/');
     } catch (e) {
       console.error(e);
     }
@@ -71,76 +69,83 @@ const RegisterForm = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline/>
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-            <LockOutlinedIcon/>
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box component="form" noValidate onSubmit={onFormSubmit} sx={{mt: 3}}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="username"
-                  label="username"
-                  name="username"
-                  autoComplete="new-username"
-                  onChange={onChange}
-                  value={users.username}
-                  error={Boolean(getFieldError('username'))}
-                  helperText={getFieldError('username')}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  onChange={onChange}
-                  value={users.password}
-                  error={Boolean(getFieldError('password'))}
-                  helperText={getFieldError('password')}
-                />
-              </Grid>
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        paddingTop: 10
+      }}
+
+    >
+      <CssBaseline/>
+      <Box
+        sx={{
+          padding: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          border: '1px solid white',
+          borderRadius: 3
+        }}
+      >
+        <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+          <LockOutlinedIcon/>
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <Box component="form" noValidate onSubmit={onFormSubmit} sx={{mt: 3}}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="username"
+                label="username"
+                name="username"
+                autoComplete="new-username"
+                onChange={onChange}
+                value={users.username}
+                error={Boolean(getFieldError('username'))}
+                helperText={getFieldError('username')}
+              />
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{mt: 3, mb: 2}}
-              disabled={registerLoading ? true : false}
-            >
-              { registerLoading ? <CircularProgress /> :'Sign Up'}
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <NavLink to="/login" style={{color:'blue'}}>
-                  Already have an account? Sign in
-                </NavLink>
-              </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="password"
+                label="password"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+                onChange={onChange}
+                value={users.password}
+                error={Boolean(getFieldError('password'))}
+                helperText={getFieldError('password')}
+              />
             </Grid>
-          </Box>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{mt: 3, mb: 2}}
+            disabled={registerLoading ? true : false}
+          >
+            {registerLoading ? <CircularProgress/> : 'Sign Up'}
+          </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <NavLink to="/login" style={{color: 'blue'}}>
+                Already have an account? Sign in
+              </NavLink>
+            </Grid>
+          </Grid>
         </Box>
-        <Copyright sx={{mt: 5}}/>
-      </Container>
-    </ThemeProvider>
+      </Box>
+      <Copyright sx={{mt: 5}}/>
+    </Container>
   );
 };
 

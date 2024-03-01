@@ -25,7 +25,7 @@ const AllPost = () => {
     <Grid container
           direction="column"
           spacing={2}
-          sx={{marginTop:'40px'}}
+          sx={{marginTop: '40px'}}
     >
       <Grid item container justifyContent="space-between" alignItems="center">
         <Grid item>
@@ -38,34 +38,59 @@ const AllPost = () => {
             item flexDirection="column"
             alignItems="center"
             gap={3}
-            sx={{ maxHeight: '600px', overflow: 'auto' }}
+            sx={{maxHeight: '600px', overflow: 'auto'}}
       >
-        <Box sx={{ maxHeight: '600px', overflow: 'auto' }}>
+        <Box sx={
+          {
+            maxHeight: '600px',
+            overflow: 'auto',
+            overflowY: 'scroll',
+            borderRadius: '10px',
+            scrollbarWidth: 'thin',
+            '&::-webkit-scrollbar': {
+              width: '10px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: 'lightgray',
+              borderRadius: '10px',
+            },
+            '&::-webkit-scrollbar-track': {
+              backgroundColor: 'transparent',
+            },
+          }}>
           {fetchLoading ? (
-            <CircularProgress color="success"  />
+            <CircularProgress color="success"/>
           ) : (
             posts.map((post) => (
-              <Box key={post.id_post}>
-                <Grid item width="40%" component={Link} to={'/posts/' + post.id_post}>
-                  <Card sx={{ display: 'flex', mb: 1, width: '500px' }} style={{ backgroundColor: '#f5f5f5' }}>
+              <Box
+                key={post.id_post}
+              >
+                <Grid
+                  item
+                  width="40%"
+                  component={Link}
+                  to={'/posts/' + post.id_post}
+                >
+                  <Card sx={{display: 'flex', mb: 1, width: '500px', background: '#3C3C3C'}}>
                     {!post.image ? (
-                      <ChatOutlinedIcon sx={{ fontSize: 80, mt: '5%' }} />
+                      <ChatOutlinedIcon sx={{fontSize: 80, mt: '5%'}}/>
                     ) : null}
 
-                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <CardContent sx={{ flex: '1 0 auto' }}>
+                    <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                      <CardContent sx={{flex: '1 0 auto'}}>
                         <Typography component="div" variant="h6" fontWeight="fontWeightBold">
                           {post.title}
                         </Typography>
                         <Typography component="div" variant="h6" fontWeight="medium" fontStyle="oblique">
                           {post.username}
                         </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" fontSize={14} fontStyle="oblique">
+                        <Typography variant="subtitle1" color="text.secondary" component="div" fontSize={14}
+                                    fontStyle="oblique">
                           {dayjs(post.datetime).format('YYYY.MM.DD HH:mm')}
                         </Typography>
 
                         <CardMedia
-                          sx={{ height: '100px' }}
+                          sx={{height: '100px'}}
                           image={`http://localhost:8000/${post.image}`}
                         />
                       </CardContent>

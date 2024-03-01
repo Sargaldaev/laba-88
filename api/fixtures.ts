@@ -35,37 +35,69 @@ const run = async () => {
       user: user._id,
       title: 'AllPost 1',
       image: '',
-      description: 'post 1 description',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores assumenda autem beatae corporis\n' +
+        '          delectus dolor doloremque dolorum eaque excepturi expedita facere, impedit in ipsa libero maxime nam nesciunt\n' +
+        '          omnis perferendis quae reiciendis ut vitae voluptatibus! Architecto, atque delectus deleniti dicta ea error\n' +
+        '          eveniet excepturi expedita iusto laborum, nam nobis perspiciatis possimus quas quidem quis ratione recusandae\n' +
+        '          voluptatum? Harum impedit ipsa necessitatibus nobis quibusdam reiciendis velit vero voluptatem! Ab accusamus\n' +
+        '          accusantium alias aliquam aliquid atque beatae blanditiis delectus dolore doloremque earum eius harum in\n' +
+        '          inventore iure minima molestiae, natus neque, quia quod reiciendis rem repellendus saepe sequi ullam?\n' +
+        '          Expedita, recusandae!',
       datetime: new Date().toISOString(),
     },
     {
       user: user._id,
       title: 'AllPost 2',
       image: '',
-      description: 'post 2 description',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores assumenda autem beatae corporis\n' +
+        '          delectus dolor doloremque dolorum eaque excepturi expedita facere, impedit in ipsa libero maxime nam nesciunt\n' +
+        '          omnis perferendis quae reiciendis ut vitae voluptatibus! Architecto, atque delectus deleniti dicta ea error\n' +
+        '          eveniet excepturi expedita iusto laborum, nam nobis perspiciatis possimus quas quidem quis ratione recusandae\n' +
+        '          voluptatum? Harum impedit ipsa necessitatibus nobis quibusdam reiciendis velit vero voluptatem! Ab accusamus\n' +
+        '          accusantium alias aliquam aliquid atque beatae blanditiis delectus dolore doloremque earum eius harum in\n' +
+        '          inventore iure minima molestiae, natus neque, quia quod reiciendis rem repellendus saepe sequi ullam?\n' +
+        '          Expedita, recusandae!',
       datetime: new Date().toISOString(),
     },
     {
       user: admin._id,
       title: 'AllPost 3',
       image: '',
-      description: 'post 3 description',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores assumenda autem beatae corporis\n' +
+        '          delectus dolor doloremque dolorum eaque excepturi expedita facere, impedit in ipsa libero maxime nam nesciunt\n' +
+        '          omnis perferendis quae reiciendis ut vitae voluptatibus! Architecto, atque delectus deleniti dicta ea error\n' +
+        '          eveniet excepturi expedita iusto laborum, nam nobis perspiciatis possimus quas quidem quis ratione recusandae\n' +
+        '          voluptatum? Harum impedit ipsa necessitatibus nobis quibusdam reiciendis velit vero voluptatem! Ab accusamus\n' +
+        '          accusantium alias aliquam aliquid atque beatae blanditiis delectus dolore doloremque earum eius harum in\n' +
+        '          inventore iure minima molestiae, natus neque, quia quod reiciendis rem repellendus saepe sequi ullam?\n' +
+        '          Expedita, recusandae!',
       datetime: new Date().toISOString(),
     },
     {
       user: admin._id,
       title: 'AllPost 4',
       image: '',
-      description: 'post 4 description',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores assumenda autem beatae corporis\n' +
+        '          delectus dolor doloremque dolorum eaque excepturi expedita facere, impedit in ipsa libero maxime nam nesciunt\n' +
+        '          omnis perferendis quae reiciendis ut vitae voluptatibus! Architecto, atque delectus deleniti dicta ea error\n' +
+        '          eveniet excepturi expedita iusto laborum, nam nobis perspiciatis possimus quas quidem quis ratione recusandae\n' +
+        '          voluptatum? Harum impedit ipsa necessitatibus nobis quibusdam reiciendis velit vero voluptatem! Ab accusamus\n' +
+        '          accusantium alias aliquam aliquid atque beatae blanditiis delectus dolore doloremque earum eius harum in\n' +
+        '          inventore iure minima molestiae, natus neque, quia quod reiciendis rem repellendus saepe sequi ullam?\n' +
+        '          Expedita, recusandae!',
       datetime: new Date().toISOString(),
     },
   );
 
   await Comment.create(
     {
-      user: user._id,
+      user: admin._id,
       post: postThree._id,
-      body: 'something',
+      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, similique.\n',
     },
     {
       user: user._id,
@@ -73,19 +105,34 @@ const run = async () => {
       body: 'Hello people!',
     },
     {
-      user: admin._id,
+      user: user._id,
       post: postOne._id,
       body: 'wow',
     },
     {
-      user: user._id,
+      user: admin._id,
+      post: postOne._id,
+      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, similique',
+    },
+    {
+      user: admin._id,
       post: postFour._id,
       body: 'my name is John',
+    },
+    {
+      user: user._id,
+      post: postFour._id,
+      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, similique',
     },
     {
       user: admin._id,
       post: postTwo._id,
       body: 'Hello world',
+    },
+    {
+      user: user._id,
+      post: postTwo._id,
+      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, similique',
     },
   );
 
